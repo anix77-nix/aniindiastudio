@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Watch • AniIndiaStudio</title>
+ <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+ <header class="topbar">
+ <a class="brand" href="index.html">▲ AniIndiaStudio</a>
+ <a class="icon-btn" href="javascript:history.back()">←</a>
+ </header>
+ <main class="form-page">
+ <div class="panel">
+ <div style="aspect-ratio:16/9;background:#000;border-radius:14px;display:grid;place-items:center">
+ <p>AUTHORIZED VIDEO PLAYER AREA</p>
+ </div>
+ <h1 id="title">Episode</h1>
+ <p class="notice">
+ Yahan sirf legally licensed/authorized video source connect karna hai.
+ </p>
+ <a class="btn" id="detailsLink" href="#">Anime Details</a>
+ </div>
+</main>
+ <script src="js/data.js"></script>
+ <script>
+ const params = new URLSearchParams(location.search);
+ const id = Number(params.get("id")) || 1;
+ const ep = Number(params.get("ep")) || 1;
+ const anime = ANIME.find(a => a.id === id) || ANIME[0];
+ document.getElementById("title").textContent =
+ `${anime.title} — Episode ${ep}`;
+ document.getElementById("detailsLink").href =
+ `anime.html?id=${anime.id}`;
+ </script>
+</body>
+</html>
