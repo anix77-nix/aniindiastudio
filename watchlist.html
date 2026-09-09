@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Watchlist • AniIndiaStudio</title>
+ <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+ <header class="topbar">
+ <a class="brand" href="index.html">▲ AniIndiaStudio</a>
+ <a class="icon-btn" href="index.html">←</a>
+ </header>
+ <main class="section" style="margin-bottom:80px">
+ <h1>My Watchlist</h1>
+ <div class="card-row" id="list"></div>
+ </main>
+ <script src="js/data.js"></script>
+ <script>
+ const ids = JSON.parse(localStorage.getItem("watchlist") || "[]");
+ const items = ANIME.filter(a => ids.includes(a.id));
+ document.getElementById("list").innerHTML = items.length
+ ? items.map(a => `
+ <a class="anime-card" href="anime.html?id=${a.id}">
+ <img class="poster" src="${a.poster}" alt="${a.title}">
+ <div class="info"><h3>${a.title}</h3><p>★ ${a.rating}</p></div>
+ </a>
+ `).join("")
+ : `<p class="notice">Watchlist abhi empty hai.</p>`;
+ </script>
+</body>
+</html>
