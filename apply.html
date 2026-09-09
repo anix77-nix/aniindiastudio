@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Apply • AniIndiaStudio</title>
+ <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+ <header class="topbar">
+ <a class="brand" href="index.html">▲ AniIndiaStudio</a>
+ <a class="icon-btn" href="index.html">←</a>
+ </header>
+ <main class="form-page">
+ <div class="panel">
+ <span class="pill">JOIN OUR TEAM</span>
+ <h1>Apply to AniIndiaStudio</h1>
+ <p class="notice">
+ Voice Acting ya Editing mein kaam karna chahte ho?
+ Form submit karo. Team review ke baad selected applicants ko contact kiya jayega.
+ </p>
+ <form id="applyForm">
+ <label>Role</label>
+ <select id="role" required>
+ <option value="">Select role</option>
+ <option value="voice_artist">Voice Acting</option>
+ <option value="editor">Editor</option>
+ </select>
+ <div class="form-grid">
+ <div>
+ <label>Full Name</label>
+ <input id="fullName" required>
+ </div>
+ <div>
+ <label>Age</label>
+ <input id="age" type="number" min="13" required>
+ </div>
+ </div>
+ <label>Language / Skills</label>
+ <input id="skills" placeholder="Hindi, Bengali, editing, etc.">
+ <label>Experience</label>
+ <select id="experience" required>
+ <option value="">Select</option>
+ <option>Beginner</option>
+ <option>Some experience</option>
+ <option>Experienced</option>
+ </select>
+ <label>Sample / Portfolio Link</label>
+ <input id="sampleUrl" type="url" placeholder="https://...">
+ <label>WhatsApp Contact</label>
+ <input id="whatsapp" placeholder="Your WhatsApp contact">
+ <label>Short Introduction</label>
+ <textarea id="intro" required></textarea>
+ <button class="btn" type="submit">Submit Application</button>
+ </form>
+ <p id="applyMessage" class="notice"></p>
+ </div>
+ </main>
+ <script src="js/apply.js"></script>
+</body>
+</html>
