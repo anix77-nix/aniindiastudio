@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Anime Details • AniIndiaStudio</title>
+ <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+ <header class="topbar">
+ <a class="brand" href="index.html">▲ AniIndiaStudio</a>
+ <a class="icon-btn" href="javascript:history.back()">←</a>
+ </header>
+ <main class="form-page">
+ <div class="panel" id="details"></div>
+ </main>
+ <script src="js/data.js"></script>
+ <script>
+ const id = Number(new URLSearchParams(location.search).get("id")) || 1;
+ const anime = ANIME.find(a => a.id === id) || ANIME[0];
+ document.getElementById("details").innerHTML = `
+ <img class="poster" style="max-width:240px;border-radius:14px" src="${anime.poster}" alt="${anime.title}">
+ <h1>${anime.title}</h1>
+ <p>★ ${anime.rating} • ${anime.genre} • ${anime.episodes} episodes</p>
+ <p>${anime.description}</p>
+ <div class="tabs">
+ <a class="btn" href="watch.html?id=${anime.id}&ep=1">■ Watch Now</a>
+ <button class="tab" id="addWatchlist">■ Add to Watchlist</button>
+ </div>
+ <h2>Episodes</h2>
+ <div class="tabs">
+ ${Array.from({length: Math.min(anime.episodes, 12)}, (_, i) =>
+ `<a class="tab" href="watch.html?id=${anime.id}&ep=${i+1}">
+ Episode ${i+1}
+ </a>`
+ ).join("")}
+ </div>
+ `;
+ document.getElementById("addWatchlist").onclick = () => {
+ const list = JSON.parse(localStorage.getItem("watchlist") || "[]");
+ if (!list.includes(anime.id)) list.push(anime.id);
+ localStorage.setItem("watchlist", JSON.stringify(list));
+ alert("Watchlist mein add ho gaya.");
+ };
+ </script>
+</body>
+</html>
