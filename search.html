@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Search • AniIndiaStudio</title>
+ <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+ <header class="topbar">
+ <a class="brand" href="index.html">▲ AniIndiaStudio</a>
+ <a class="icon-btn" href="index.html">←</a>
+ </header>
+ <main>
+ <div class="search-box">
+ <input id="searchInput" placeholder="Search anime...">
+ <button class="btn" id="searchBtn">Search</button>
+ </div>
+ <section class="section">
+ <div class="tabs">
+ <button class="tab" data-filter="All">All</button>
+ <button class="tab" data-filter="Action">Action</button>
+ <button class="tab" data-filter="Adventure">Adventure</button>
+ <button class="tab" data-filter="Comedy">Comedy</button>
+ <button class="tab" data-filter="Fantasy">Fantasy</button>
+ </div>
+ <div class="card-row" id="results"></div>
+ </section>
+ </main>
+ <script src="js/data.js"></script>
+ <script>
+ const input = document.getElementById("searchInput");
+ const results = document.getElementById("results");
+ let currentFilter = "All";
+ function showResults() {
+ const q = input.value.toLowerCase().trim();
+ const list = ANIME.filter(a => {
+ const matchText =
+ a.title.toLowerCase().includes(q) ||
+ a.genre.toLowerCase().includes(q);
+ const matchFilter =
+ currentFilter === "All" ||
+ a.genre.toLowerCase().includes(currentFilter.toLowerCase());
+ return matchText && matchFilter;
+ });
+ results.innerHTML = list.map(a => `
+ <a class="anime-card" href="anime.html?id=${a.id}">
+ <img class="poster" src="${a.poster}" alt="${a.title}">
+ <div class="info">
+ <h3>${a.title}</h3>
+ <p>★ ${a.rating} • ${a.genre}</p>
+ </div>
+ </a>
+ `).join("") || `<p class="notice">No anime found.</p>`;
+ }
+ input.addEventListener("input", showResults);
+ document.getElementById("searchBtn").addEventListener("click", showResults);
+ document.querySelectorAll(".tab").forEach(btn => {
+ btn.addEventListener("click", () => {
+ currentFilter = btn.dataset.filter;
+ showResults();
+ });
+ });
+ showResults();
+ </script>
+</body>
+</html>
